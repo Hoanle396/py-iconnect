@@ -106,3 +106,26 @@ class Tiktok:
             driver.close()
             driver.quit()
             print(ex)
+    @staticmethod
+    def Trend(browser_name):
+        try:
+            URL = 'https://tiktok.com/'
+            try:
+                driver = Tiktok.init_driver(browser_name)
+                driver.get(URL)
+            except AttributeError:
+                print("Driver is not set")
+                exit()
+            try:
+                wait = WebDriverWait(driver, 10)
+                state_data = driver.execute_script("return window['SIGI_STATE']")
+                data = state_data['ItemModule']
+                driver.close()
+                driver.quit()
+                return json.dumps(data)
+            except:
+                return False
+        except Exception as ex:
+            driver.close()
+            driver.quit()
+            print(ex)

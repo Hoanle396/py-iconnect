@@ -1,9 +1,6 @@
-
-from multiprocessing.dummy import Array
 from flask import jsonify, request, send_file,make_response
 from flask_cors import cross_origin
 from TikTok.Tiktok import Tiktok
-import app.settings as setting
 import json
 import pandas as pd
 def TiktokRoute(app):
@@ -32,3 +29,11 @@ def TiktokRoute(app):
             return make_response(jsonify(json.loads(data))),200 
          else:return make_response(jsonify({'error':'not found user by username'}),400)
       return make_response(jsonify({"status":"Bad request","data":"Error to load username", "code":400}),400)
+   @app.route('/api/tiktok/trend',methods=['GET'])
+   @cross_origin()
+   def getTrend():
+      api=Tiktok()
+      data= api.Trend("chrome")
+      if data!=False:
+         return make_response(jsonify(json.loads(data))),200 
+      else:return make_response(jsonify({'error':'Crawl data false'}),400)

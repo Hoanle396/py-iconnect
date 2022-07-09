@@ -2,8 +2,6 @@ import os
 from flask import request ,send_file
 from PIL import Image
 from flask_cors import cross_origin 
-import cv2
-import numpy as np
 def ImageRoute(app):
    @app.route('/api/image/resize',methods=['POST'])
    @cross_origin()
